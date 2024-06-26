@@ -1,0 +1,28 @@
+name: 'Check if Docker image tag exists'
+description: 'Check if specific Docker image tag exists.'
+branding:
+  icon: 'tag'
+  color: 'blue'
+inputs:
+  owner:
+    description: 'The image owner.'
+    required: true
+  name:
+    description: 'The image name.'
+    required: true
+  tag:
+    description: 'The tag name.'
+    required: true
+outputs:
+  exists:
+    description: ''
+    value: ${{ steps.check-docker-image-tag.outputs.exists }}
+runs:
+  using: 'composite'
+  steps:
+    - id: check-docker-image-tag
+      shell: bash
+      run: |
+        curl -s https://hub.docker.com/v2/namespaces/${{ inputs.owner }}/repositories/${{ inputs.name }}/tags/${{ inputs.tag }} > response.out
+        EXISTS=$(jq '.name == "${{ inputs.tag }}"' -r response.out)
+        echo "exists=$EXISTS" >> $GITHUB_OUTPUT

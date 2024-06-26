@@ -1,0 +1,30 @@
+on: [push]
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        include:
+          - tag: '0.127.0'
+            exists: true
+          - tag: '0.128.0'
+            exists: true
+          - tag: '123.456.789'
+            exists: false
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: check-docker-image-tag
+        uses: ./
+        with:
+          owner: hugomods
+          name: hugo
+          tag: ${{ matrix.tag }}
+      
+      - run: |
+          if [[ ${{ steps.check-docker-image-tag.outputs.exists }} != ${{ matrix.exists }} ]];
+          then
+            echo 'expected ${{ matrix.exists }}, got ${{ steps.check-docker-image-tag.outputs.exists }}.'
+            exit 1;
+          fi
