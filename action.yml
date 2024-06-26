@@ -25,4 +25,9 @@ runs:
       run: |
         curl -s https://hub.docker.com/v2/namespaces/${{ inputs.owner }}/repositories/${{ inputs.name }}/tags/${{ inputs.tag }} > response.out
         EXISTS=$(jq '.name == "${{ inputs.tag }}"' -r response.out)
-        echo "exists=$EXISTS" >> $GITHUB_OUTPUT
+        if [[ $EXISTS == 'true' ]]
+        then
+          echo "exists=1" >> $GITHUB_OUTPUT;
+        else
+          echo "exists=0" >> $GITHUB_OUTPUT;
+        fi

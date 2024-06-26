@@ -6,11 +6,11 @@ jobs:
       matrix:
         include:
           - tag: '0.127.0'
-            exists: true
+            exists: 1
           - tag: '0.128.0'
-            exists: true
+            exists: 1
           - tag: '123.456.789'
-            exists: false
+            exists: 0
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
