@@ -15,6 +15,8 @@ jobs:
           owner: hugomods
           name: hugo
           tag: '0.128.0'
-      - if: ${{ steps.check-docker-image-tag.outputs.exists }}
+      - if: ${{ steps.check-docker-image-tag.outputs.exists == true }}
         run: echo "image tag exists"
+      - if: ${{ steps.check-docker-image-tag.outputs.exists != true }}
+        run: echo "image tag does not exist"
 ```
