@@ -6,10 +6,10 @@
 on: [push]
 
 jobs:
-  github_latest_release_job:
+  check_docker_image_tag:
     runs-on: ubuntu-latest
     steps:
-      - id: check-docker-image-tag
+      - id: check-docker-image-tag # used by other steps.
         uses: razonyang/github-action-docker-image-tag-exists@v1
         with:
           owner: hugomods
