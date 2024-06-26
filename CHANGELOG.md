@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/razonyang/github-action-docker-image-tag-exists/compare/v1.0.0...v1.0.1) (2024-06-26)
+
+
+### Bug Fixes
+
+* corret output ([f8ddf85](https://github.com/razonyang/github-action-docker-image-tag-exists/commit/f8ddf8547729695dfe1cb7f567519470c2e9a377))
+
 ## 1.0.0 (2024-06-26)
 
 
